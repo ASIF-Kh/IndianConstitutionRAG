@@ -27,16 +27,12 @@ def initialize_chatbot():
     try:
         load_dotenv()
         
-        llm = Gemini(api_key=os.environ["GOOGLE_API_KEY"],model="models/gemini-1.5-pro-002")
+        llm = Gemini(api_key=os.environ["GOOGLE_API_KEY"],model="models/gemini-1.5-flash-8b")
         embed_model = GeminiEmbedding(model_name="models/embedding-001")
         
         Settings.llm = llm
         Settings.embed_model = embed_model
         
-        # load_client = chromadb.PersistentClient(path="./chroma_db")
-        # chroma_collection = load_client.get_collection("constitution6")
-        # vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
-
         pinecone_client = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
         pinecone_index = pinecone_client.Index("aiagent")
         vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
@@ -92,7 +88,23 @@ def main():
         layout="wide"
     )
     
-    st.title("Knowledge AI Agent")
+    with st.sidebar:
+        st.image("https://tile.loc.gov/image-services/iiif/service:ll:llscd:57026883:00010000/full/pct:100/0/default.jpg", use_column_width=True)
+        st.header("Indian Constitution AI Agent")
+        st.markdown(
+            """
+            - 💡 Ask questions related to knowledge domains.
+            - 🛠 Powered by **Retrieval-Augmented Generation**.
+            - 📚 Data source: Indian Constitution articles.
+            """
+        )
+        st.divider()
+        st.info("Developed using **Streamlit** and **LLM Technologies**.")
+    
+    # Title and Introduction
+    st.title("📚 Indian Constitution AI Agent")
+    st.write("Welcome! I can answer your queries related to knowledge domains using the Indian Constitution as the dataset. Start by asking a question below!")
+    st.divider()
     
     # Initialize system
     try:
