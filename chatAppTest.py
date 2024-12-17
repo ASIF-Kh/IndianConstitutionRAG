@@ -25,8 +25,23 @@ def main():
         layout="wide"
     )
     
-    st.title("Knowledge AI Agent")
+    with st.sidebar:
+        st.image("https://tile.loc.gov/image-services/iiif/service:ll:llscd:57026883:00010000/full/pct:100/0/default.jpg", use_column_width=True)
+        st.header("Indian Constitution AI Agent")
+        st.markdown(
+            """
+            - 💡 Ask questions related to knowledge domains.
+            - 🛠 Powered by **Retrieval-Augmented Generation**.
+            - 📚 Data source: Indian Constitution articles.
+            """
+        )
+        st.divider()
+        st.info("Developed using **Streamlit** and **LLM Technologies**.")
     
+    # Title and Introduction
+    st.title("📚 Indian Constitution AI Agent")
+    st.write("Welcome! I can answer your queries related to knowledge domains using the Indian Constitution as the dataset. Start by asking a question below!")
+    st.divider()
     # Initialize system
     try:
         if 'query_engine' not in st.session_state:

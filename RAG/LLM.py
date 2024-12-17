@@ -1,5 +1,3 @@
-
-
 import os
 from dotenv import load_dotenv
 from llama_index.core import Settings
@@ -23,7 +21,7 @@ def initialize_chatbot():
     try:
         load_dotenv()
         
-        llm = Gemini(api_key=os.environ["GOOGLE_API_KEY"],model="models/gemini-1.5-pro-002")
+        llm = Gemini(api_key=os.environ["GOOGLE_API_KEY"],model="models/gemini-1.5-flash-8b")
         embed_model = GeminiEmbedding(model_name="models/embedding-001")
         
         Settings.llm = llm
@@ -82,13 +80,12 @@ def ingestion_pipeline(db="pinecone"):
 
     if db == "pinecone":
         pinecone_client = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-        pinecone_index = pinecone_client.Index("constitution")
+        pinecone_index = pinecone_client.Index("aiagent")
         vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
     else:
     # Create a client and a new collection
         client = chromadb.PersistentClient(path="./chroma_db")
         chroma_collection = client.get_or_create_collection("constitution")
-        # Create a vector store
         vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
         
     # Create a storage context

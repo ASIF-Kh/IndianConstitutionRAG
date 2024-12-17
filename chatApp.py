@@ -38,7 +38,7 @@ def initialize_chatbot():
         # vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
         pinecone_client = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-        pinecone_index = pinecone_client.Index("constitution")
+        pinecone_index = pinecone_client.Index("aiagent")
         vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
 
 
