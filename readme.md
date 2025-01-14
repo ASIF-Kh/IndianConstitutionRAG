@@ -1,5 +1,3 @@
-Here's an updated version of the README with placeholders for images. Replace the placeholders with the actual paths or links to the images/screenshots:
-
 ---
 
 # IndianConstitutionRAG
